@@ -15,6 +15,9 @@
         <button @click="showEveryTodos">Tout voir</button>
         <button @click="showNotCompleteds">Complétés</button>
         <button @click="showCompleteds">À faire</button>
+        <br>
+        <input type="text" id="inputNewTodo">
+        <button @click="createTodo">Créer la todo</button>
     </div>
 
 </template>
@@ -62,6 +65,16 @@ export default{
                 }
             }
         },
+        createTodo: function(){
+            let newName = document.getElementById("inputNewTodo").value;
+            let newId = this.todos.length+1;
+            let newTodo = {
+                id: newId,
+                name: newName,
+                completed: false
+            }
+            this.todos.push(newTodo);
+        },
         showEveryTodos: function(){
             this.filter= 'all';
         },
@@ -75,7 +88,6 @@ export default{
     computed: {
         filteredTodos: function (){
             if (this.filter == 'uncompleted'){
-                console.log("coucou");
                 return this.todos.filter(todo => !todo.completed)
             }
             else if (this.filter == 'completed'){
