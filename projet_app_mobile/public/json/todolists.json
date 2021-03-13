@@ -1,0 +1,50 @@
+[
+    {
+        "idTodoList": 1,
+        "name": "todolist 1",
+        "completed": false,
+        "todos": [
+            {
+                "id": 1,
+                "name": "tache 1",
+                "completed": false
+            },
+            {
+                "id": 2,
+                "name": "tache 2",
+                "completed": true
+            },
+            {
+                "id": 3,
+                "name": "tache 3",
+                "completed": true
+            }
+                ],
+        "newTodo": "",
+        "filter": "all"
+    },
+    {
+        "idTodoList": 2,
+        "name": "todolist 2",
+        "completed": false,
+        "todos": [
+            {
+                "id": 1,
+                "name": "tache 1-2",
+                "completed": false
+            },
+            {
+                "id": 2,
+                "name": "tache 2-2",
+                "completed": true
+            },
+            {
+                "id": 3,
+                "name": "tache 3-2",
+                "completed": true
+             }
+        ],
+        "newTodo": "",
+        "filter": "all"
+    }
+]

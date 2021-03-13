@@ -2,7 +2,7 @@
     <div class="todolist">
         <h1 @click="afficherTodos()">Ma todo :</h1>
         <ul>
-            <li v-for="todo in filteredTodos" :key = "todo">
+            <li v-for="todo in filteredTodos" :key = "todo.id">
             <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo)">
             <input type="checkbox" v-else @change="updateTodo(todo)">
             
@@ -24,27 +24,33 @@
 
 
 <script>
+
 export default{
-    name : 'Todolist',
+    props: {
+        idTodoList : {type: Number, default: 1}
+    },
+    name: 'Todolist',
+
     data(){
             return{
-            todos: [
-                {
-                    id: 1,
-                    name: 'tache 1',
-                    completed: false
-                },
-                {
-                    id: 2,
-                    name: 'tache 2',
-                    completed: true
-                },
-                {
-                    id: 3,
-                    name: 'tache 3',
-                    completed: true
-                }
-            ],
+                            "todos": [
+                                {
+                                    "id": 1,
+                                    "name": "tache 1",
+                                    "completed": false
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "tache 2",
+                                    "completed": true
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "tache 3",
+                                    "completed": true
+                                }
+                                    ],
+  
             newTodo: '',
             filter: 'all',
             }
@@ -93,9 +99,11 @@ export default{
             else if (this.filter == 'completed'){
                 return this.todos.filter(todo => todo.completed)
             }
-            return this.todos
-        }
+            return this.todos;
+        },
+
     }
+
 }
 
 </script>
