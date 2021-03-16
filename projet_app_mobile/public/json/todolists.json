@@ -1,6 +1,6 @@
 [
     {
-        "idTodoList": 1,
+        "idTodoList": "1",
         "name": "todolist 1",
         "completed": false,
         "todos": [
@@ -24,7 +24,7 @@
         "filter": "all"
     },
     {
-        "idTodoList": 2,
+        "idTodoList": "2",
         "name": "todolist 2",
         "completed": false,
         "todos": [

@@ -1,6 +1,6 @@
 <template>
     <div class="todolist">
-        <h1 @click="afficherTodos()">Ma todo :</h1>
+        <!--<h1 @click="afficherTodos()">Ma todo :</h1>
         <ul>
             <li v-for="todo in filteredTodos" :key = "todo.id">
             <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo)">
@@ -17,44 +17,33 @@
         <button @click="showCompleteds">À faire</button>
         <br>
         <input type="text" id="inputNewTodo">
-        <button @click="createTodo">Créer la todo</button>
+        <button @click="createTodo">Créer la todo</button>-->
+
+        <h2> {{ list.name }} </h2>
+        <ul>
+            <li v-for="todo in list.todos" :key = "todo.id">
+            <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo)">
+            <input type="checkbox" v-else @change="updateTodo(todo)">
+            {{ todo.name }}
+            <button @click="deleteTodo(todo.id)"> supprimer la todo </button>
+            </li>
+        </ul>
     </div>
 
 </template>
 
 
 <script>
-
+import  { mapGetters } from "vuex";
 export default{
-    props: {
-        idTodoList : {type: Number, default: 1}
-    },
     name: 'Todolist',
-
     data(){
             return{
-                            "todos": [
-                                {
-                                    "id": 1,
-                                    "name": "tache 1",
-                                    "completed": false
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "tache 2",
-                                    "completed": true
-                                },
-                                {
-                                    "id": 3,
-                                    "name": "tache 3",
-                                    "completed": true
-                                }
-                                    ],
-  
-            newTodo: '',
-            filter: 'all',
             }
         },
+    props: {
+        idTodoList : {type: String, default: "1"}
+    },
     methods: {
         afficherTodos: function(){
             console.log(this.todos);
@@ -89,7 +78,7 @@ export default{
         },
         showNotCompleteds: function(){
             this.filter= 'completed';
-        }
+        },
     },
     computed: {
         filteredTodos: function (){
@@ -101,6 +90,10 @@ export default{
             }
             return this.todos;
         },
+        ...mapGetters('todolist', ["getList"]),
+        list(){
+            return this.getList(this.idTodoList);
+        }
 
     }
 

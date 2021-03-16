@@ -2,7 +2,7 @@
     <div class="sideBar">
         <h1>Ma sideBar :</h1>
         <ul>
-            <li v-for="todoList in todolists" v-bind:key = "todoList.idTodoList">
+            <li v-for="todoList in lists" v-bind:key = "todoList.idTodoList">
             <input type="checkbox" checked v-if="todoList.completed" @change="updateTodo(todoList.idTodoList)">
             <input type="checkbox" v-else @change="updateTodo(todoList.idTodoList)">            
             {{ todoList.name }} 
@@ -18,63 +18,9 @@
 
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default{
     name : 'LeftSideBar',
-    data(){
-            return{
-                todolists:
-                    [
-                        {
-                            "idTodoList": 1,
-                            "name": "todolist 1",
-                            "completed": false,
-                            "todos": [
-                                {
-                                    "id": 1,
-                                    "name": "tache 1",
-                                    "completed": false
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "tache 2",
-                                    "completed": true
-                                },
-                                {
-                                    "id": 3,
-                                    "name": "tache 3",
-                                    "completed": true
-                                }
-                                    ],
-                            "newTodo": "",
-                            "filter": "all"
-                        },
-                        {
-                            "idTodoList": 2,
-                            "name": "todolist 2",
-                            "completed": false,
-                            "todos": [
-                                {
-                                    "id": 1,
-                                    "name": "tache 1-2",
-                                    "completed": false
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "tache 2-2",
-                                    "completed": true
-                                },
-                                {
-                                    "id": 3,
-                                    "name": "tache 3-2",
-                                    "completed": true
-                                }
-                            ],
-                            "newTodo": "",
-                            "filter": "all"
-                        }
-                    ]
-            }
-        },
     methods: {
         developTodoList: function(id){
             this.$emit('updateDisplayedTodoList',id); //on prévient le parent qui est App.vue qu'on demande l'affichage d'une todo, on précise son id
@@ -97,7 +43,14 @@ export default{
             };
             this.todolists.push(newTodoList);
         },
+        ...mapActions("todolist", ["load"]),
     },
+    created() {
+        this.load();
+    },
+    computed: {
+        ...mapGetters("todolist", ["lists"]),
+    }
 }
 
 
