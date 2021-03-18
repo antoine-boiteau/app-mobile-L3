@@ -1,6 +1,8 @@
 <template>
+  
   <LeftSideBar @updateDisplayedTodoList="changeDisplayedTodoList" ></LeftSideBar>
   <Todolist :selectedTodoList="selectedTodoList"></Todolist>
+  
 </template>
 
 <script>
@@ -26,3 +28,9 @@ export default {
   }
 }
 </script>
+
+
+<style>
+
+
+</style>
