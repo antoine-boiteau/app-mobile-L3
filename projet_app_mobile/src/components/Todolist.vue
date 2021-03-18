@@ -19,84 +19,68 @@
         <input type="text" id="inputNewTodo">
         <button @click="createTodo">Créer la todo</button>-->
 
-        <h2> {{ list.name }} </h2>
+        <h2> {{ getName }} </h2>
+        <button @click="showEveryTodos">Tout voir</button>
+        <button @click="showCompleteds">Complétés</button>
+        <button @click="showNotCompleteds">À faire</button>
         <ul>
-            <li v-for="todo in list.todos" :key = "todo.id">
-            <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo)">
-            <input type="checkbox" v-else @change="updateTodo(todo)">
+            <li v-for="todo in filteredTodos" :key = "todo.id">
+            <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
+            <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
             {{ todo.name }}
             <button @click="deleteTodo(todo.id)"> supprimer la todo </button>
             </li>
         </ul>
+        <input type="text" name="newTodoName" v-model="newTodoName">
+        <button @click="createTodo({newTodoName,selectedTodoList})">Créer la todo</button>
     </div>
 
 </template>
 
 
 <script>
-import  { mapGetters } from "vuex";
+import  { mapActions, mapGetters } from "vuex";
 export default{
     name: 'Todolist',
     data(){
             return{
+                newTodoName: '',
+                filter: 'all'
             }
         },
     props: {
-        idTodoList : {type: String, default: "1"}
+        selectedTodoList: {type: Number, default: 1}
     },
     methods: {
-        afficherTodos: function(){
-            console.log(this.todos);
-        },
-        updateTodo: function(todo){
-            todo.completed = !todo.completed;
-        },
-        deleteTodo: function(id){
-            this.todos.splice(id-1,1);
-            for(let todo of this.todos){
-                console.log(todo.id);
-                if(id < todo.id){
-                    todo.id = todo.id -1;
-                }
-            }
-        },
-        createTodo: function(){
-            let newName = document.getElementById("inputNewTodo").value;
-            let newId = this.todos.length+1;
-            let newTodo = {
-                id: newId,
-                name: newName,
-                completed: false
-            }
-            this.todos.push(newTodo);
-        },
         showEveryTodos: function(){
             this.filter= 'all';
         },
         showCompleteds: function(){
-            this.filter= 'uncompleted';
-        },
-        showNotCompleteds: function(){
             this.filter= 'completed';
         },
+        showNotCompleteds: function(){
+            this.filter= 'uncompleted';
+        },
+        ...mapActions('todolist', ["createTodo", "deleteTodo", "completeTodo"]),
+        updateTodo: function(name, todolist_id, completed, id) {
+            this.completeTodo({name, todolist_id, completed, id});
+        }
     },
     computed: {
+        ...mapGetters('todolist', ["getListName", "getEverytodo", "getCompletedOnly", "getUncompletedOnly"]),
         filteredTodos: function (){
             if (this.filter == 'uncompleted'){
-                return this.todos.filter(todo => !todo.completed)
+                return this.getUncompletedOnly(this.selectedTodoList);
             }
             else if (this.filter == 'completed'){
-                return this.todos.filter(todo => todo.completed)
+                return this.getCompletedOnly(this.selectedTodoList);
             }
-            return this.todos;
+            return this.getEverytodo(this.selectedTodoList);
         },
-        ...mapGetters('todolist', ["getList"]),
-        list(){
-            return this.getList(this.idTodoList);
+        getName: function () {
+            return this.getListName(this.selectedTodoList);
         }
-
     }
-
 }
 
 </script>

@@ -1,3 +1,3 @@
-export function user(state) {
-    return state.user;
+export function userToken(state) {
+    return state.token;
 }

@@ -5,12 +5,10 @@ export function login({ commit }, payload) {
     let password = payload.password;
     axios.post('http://138.68.74.39/api/login', {email,password})
     .then(function (response) {
-        commit("setUserToken", response.data);
+        commit("setUserToken", response.data.token);
     })
     .catch(function (error) {
-        console.log(error);
-        if(error.response.data.errors != null)
-            alert(error.response.data.errors[0]);
+        alert(error.response.data.error);
     })
 }
 
