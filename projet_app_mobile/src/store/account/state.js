@@ -1,5 +1,9 @@
 export default function() {
     return {
-        user: null
+        user: {
+            name:'',
+            email:''
+        },
+        token: ''
     }
 }

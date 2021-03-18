@@ -1,25 +1,32 @@
 import axios from 'axios';
 
-export function login(email, password, { commit }) {
-    axios.post('http://138.68.74.39/api/login?email=' + email + '&password=' + password)
+export function login({ commit }, payload) {
+    let email = payload.email;
+    let password = payload.password;
+    axios.post('http://138.68.74.39/api/login', {email,password})
     .then(function (response) {
-        console.log(response.data);
-        commit("signIn", response.data);
+        commit("setUserToken", response.data);
     })
     .catch(function (error) {
         console.log(error);
+        if(error.response.data.errors != null)
+            alert(error.response.data.errors[0]);
     })
 }
 
-export function register(name, email, password, { commit }) {
-    console.log("coucou");
-    axios.post('http://138.68.74.39/api/register?name=' + name + '&email=' + email + '&password=' + password)
+export function register({ commit }, payload) {
+    let name = payload.name;
+    let email = payload.email;
+    let password = payload.password;
+    axios.post('http://138.68.74.39/api/register', {name,email,password})
     .then(function (response) {
-        console.log(response.data);
-        commit("signIn", response.data);
+        commit("setUserToken", response.data.token);
     })
     .catch(function (error) {
-        console.log(error);
+        if(error.response.data.errors != null)
+            alert(error.response.data.errors[0]);
+        else
+            alert(error.response.data.message);
     })
 }
 

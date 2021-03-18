@@ -9,4 +9,3 @@ export function load({ commit }) {
         console.log(error);
     })
 }
-
