@@ -1,29 +1,11 @@
 <template>
     <div class="todolist">
-        <!--<h1 @click="afficherTodos()">Ma todo :</h1>
-        <ul>
-            <li v-for="todo in filteredTodos" :key = "todo.id">
-            <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo)">
-            <input type="checkbox" v-else @change="updateTodo(todo)">
-            
-            {{ todo.name }} 
-
-            <button @click="deleteTodo(todo.id)"> supprimer la todo </button>
-            </li>
-        </ul>
-        
-        <button @click="showEveryTodos">Tout voir</button>
-        <button @click="showNotCompleteds">Complétés</button>
-        <button @click="showCompleteds">À faire</button>
-        <br>
-        <input type="text" id="inputNewTodo">
-        <button @click="createTodo">Créer la todo</button>-->
 
         <h2> {{ getName }} </h2>
         <button @click="showEveryTodos">Tout voir</button>
         <button @click="showCompleteds">Complétés</button>
         <button @click="showNotCompleteds">À faire</button>
-        <ul>
+        <ul v-if="existTodo(this.selectedTodoList)">
             <li v-for="todo in filteredTodos" :key = "todo.id">
             <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
             <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
@@ -31,6 +13,8 @@
             <button @click="deleteTodo(todo.id)"> supprimer la todo </button>
             </li>
         </ul>
+        <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
+        <p v-else><b>Aucune liste sélectionnée</b></p>
         <input type="text" name="newTodoName" v-model="newTodoName">
         <button @click="createTodo({newTodoName,selectedTodoList})">Créer la todo</button>
     </div>
@@ -67,7 +51,7 @@ export default{
         }
     },
     computed: {
-        ...mapGetters('todolist', ["getListName", "getEverytodo", "getCompletedOnly", "getUncompletedOnly"]),
+        ...mapGetters('todolist', ["existList", "getListName","existTodo", "getEverytodo", "getCompletedOnly", "getUncompletedOnly"]),
         filteredTodos: function (){
             if (this.filter == 'uncompleted'){
                 return this.getUncompletedOnly(this.selectedTodoList);
