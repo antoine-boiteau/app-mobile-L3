@@ -12,22 +12,22 @@ export const getListName = (state) => (id) => {
     return res != null ? res.name : null;
 }
 
-export const existTodo = (state) => (id) => {
-    let res = state.todoLists.find((list) => list.id === id);
-    return res != null ? res.todos.length > 0 : false;
+export const existTodo = (state) => {
+    return state.todos.length > 0;
 }
 
-export const getEverytodo = (state) => (id) => {
-    let res = state.todoLists.find((list) => list.id === id);
-    return res != null ? res.todos : null;
+export const getTodosLength = (state) => {
+    return state.todos.length;
 }
 
-export const getCompletedOnly = (state) => (id) => {
-    let res = state.todoLists.find((list) => list.id === id);
-    return res != null ? res.todos.filter(todo => todo.completed) : null;
+export const getEveryTodo = (state) => {
+    return state.todos;
 }
 
-export const getUncompletedOnly = (state) => (id) => {
-    let res = state.todoLists.find((list) => list.id === id);
-    return res != null ? res.todos.filter(todo => !todo.completed) : null;
+export const getCompletedOnly = (state) => {
+    return state.todos.filter(todo => todo.completed);
+}
+
+export const getUncompletedOnly = (state) => {
+    return state.todos.filter(todo => !todo.completed);
 }

@@ -10,12 +10,21 @@ export function load({ commit }) {
     })
 }
 
+export function loadTodos({ commit }, id) {
+    httpClient.get('todos/' + id)
+    .then(function (response) {
+        commit("loadTodos", response.data);
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+}
+
 export function createList({ commit }, payload) {
     let name = payload.newListName;
     httpClient.post('todolist', {name})
     .then(function (response) {
         commit("create", response.data);
-        console.log(response.data);
     })
     .catch(function (error) {
         console.log(error);
