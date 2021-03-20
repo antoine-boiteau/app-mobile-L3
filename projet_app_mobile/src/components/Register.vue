@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="form">
         <h2>Inscription</h2>
-        Name :
-        <input type="text" name="name" v-model="name"><br>
-        Email :
-        <input type="email" name="email" v-model="email"><br>
-        Password :
-        <input type="password" name="password" v-model="password"><br>
+        <label> Nom : <input type="text" placeholder="Nouvel identifiant" name="name" v-model="name"></label>
+        <br>
+        <label> Email : <input type="email" placeholder="Adresse mail" name="email" v-model="email"></label>
+        <br>
+        <label> Mot de passe : <input type="password" placeholder="Mot de passe" name="password" v-model="password"></label>
+        <br>
         <button @click="register({name,email,password})">S'inscrire</button>
     </div>
 </template>
@@ -31,7 +31,7 @@ export default {
         user() {
             return this.getUser();
         },
-        
+
     }
 }
 </script>

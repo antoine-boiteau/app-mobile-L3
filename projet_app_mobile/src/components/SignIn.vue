@@ -1,10 +1,8 @@
 <template>
-    <div>
+    <div class="form">
         <h2>Connexion</h2>
-        Email :
-        <input type="email" name="email" v-model="email"><br>
-        Password :
-        <input type="password" name="password" v-model="password"><br>
+        <label>Email : <input type="email" placeholder="Adresse mail" name="email" v-model="email"></label><br>
+        <label>Mot de passe : <input type="password" placeholder="Mot de passe" name="password" v-model="password"></label><br>
         <button @click="login({email,password})">Se connecter</button>
     </div>
 </template>

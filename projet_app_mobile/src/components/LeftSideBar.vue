@@ -2,15 +2,15 @@
     <div class="sideBar">
         <h1>Mes listes :</h1>
         <ul v-if="lists.length > 0">
-            <li v-for="todoList in lists" v-bind:key = "todoList.id">           
-            {{ todoList.name }} 
-            <button @click="developTodoList(todoList.id)"> developper la todolist </button>
+            <li v-for="todoList in lists" v-bind:key = "todoList.id">
+            {{ todoList.name }}
+            <button @click="developTodoList(todoList.id)"> développer la todolist </button>
             <button @click="deleteList(todoList.id)">Supprimer la todolist</button>
             </li>
         </ul>
-        <b v-else>Vous n'avez aucune listes piur le momment</b><br>
+        <b v-else>Vous n'avez aucune liste pour le moment !</b><br>
 
-        <input type="text" name="newListName" v-model="newListName">
+        <input type="text" placeholder="Nouvelle todolist" name="newListName" v-model="newListName">
         <button @click="createList({newListName})">Créer la todolist</button>
     </div>
 </template>

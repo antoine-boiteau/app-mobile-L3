@@ -2,11 +2,8 @@
     <div class="todolist">
 
         <h2> {{ getName }} </h2>
-        <button @click="showEveryTodos">Tout voir</button>
-        <button @click="showCompleteds">Complétés</button>
-        <button @click="showNotCompleteds">À faire</button>
         <ul v-if="existTodo(this.selectedTodoList)">
-            <li v-for="todo in filteredTodos" :key = "todo.id">
+            <li v-for="todo in filteredTodos" :key = "todo.id" class="todo">
             <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
             <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
             {{ todo.name }}
@@ -15,8 +12,14 @@
         </ul>
         <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
         <p v-else><b>Aucune liste sélectionnée</b></p>
-        <input type="text" name="newTodoName" v-model="newTodoName">
-        <button @click="createTodo({newTodoName,selectedTodoList})">Créer la todo</button>
+        <input type="text" placeholder="Nouvelle tâche" name="newTodoName" v-model="newTodoName">
+        <button @click="createTodo({newTodoName,selectedTodoList})">Créer la tâche</button>
+        <div class="filters">
+          Filtrer :
+          <button @click="showEveryTodos">Voir tout</button>
+          <button @click="showCompleteds">Complétées</button>
+          <button @click="showNotCompleteds">À faire</button>
+        </div>
     </div>
 
 </template>
@@ -69,3 +72,25 @@ export default{
 
 </script>
 
+<style>
+  .todolist {
+      background-color : #fffae1 ;
+
+      padding: 10px 2vw 10px 2vw;
+  }
+
+  .todolist > * {
+    max-width: 90%;
+  }
+
+  .todo {
+  border-bottom : solid 1px #444455;
+  margin : 0px 5px 0px 5px;
+  padding : 5px;
+  }
+
+  .filters {
+    margin: 10px 0px 0px 0px;
+  }
+
+</style>
