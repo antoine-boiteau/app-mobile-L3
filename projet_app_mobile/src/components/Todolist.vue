@@ -84,9 +84,12 @@ export default{
   }
 
   .todo {
-  border-bottom : solid 1px #444455;
   margin : 0px 5px 0px 5px;
   padding : 5px;
+  }
+
+  .todo + .todo {
+    border-top : solid 1px #444455;
   }
 
   .filters {

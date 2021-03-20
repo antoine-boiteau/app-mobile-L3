@@ -3,9 +3,8 @@
         <h1>Mes listes :</h1>
         <ul v-if="lists.length > 0">
             <li v-for="todoList in lists" v-bind:key = "todoList.id">
-            {{ todoList.name }}
-            <button @click="developTodoList(todoList.id)"> développer la todolist </button>
-            <button @click="deleteList(todoList.id)">Supprimer la todolist</button>
+            <button @click="developTodoList(todoList.id)" class="todolistClickable"> {{ todoList.name }} </button>
+            <button @click="deleteList(todoList.id)">X</button>
             </li>
         </ul>
         <b v-else>Vous n'avez aucune liste pour le moment !</b><br>
@@ -43,3 +42,13 @@ export default{
 
 
 </script>
+
+<style>
+.todolistClickable{
+  padding: 10px;
+  background-color : #fffae1 ;
+  font-size: 25px;
+}
+
+
+</style>
