@@ -4,10 +4,12 @@
         <h2> {{ getName }} </h2>
         <ul v-if="existTodo(this.selectedTodoList)">
             <li v-for="todo in filteredTodos" :key = "todo.id" class="todo">
-            <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
-            <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
-            {{ todo.name }}
-            <button @click="deleteTodo(todo.id)"> supprimer la todo </button>
+            <label class="todoText">
+              <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
+              <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
+              {{ todo.name }}
+            </label>
+            <button @click="deleteTodo(todo.id)"> X </button>
             </li>
         </ul>
         <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
@@ -94,6 +96,12 @@ export default{
 
   .filters {
     margin: 10px 0px 0px 0px;
+  }
+
+  .todoText {
+    display: inline-block;
+    font-size : 22px ;
+    width: 90%;
   }
 
 </style>
