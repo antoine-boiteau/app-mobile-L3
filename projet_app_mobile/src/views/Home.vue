@@ -1,8 +1,8 @@
 <template>
-  
-  <LeftSideBar @updateDisplayedTodoList="changeDisplayedTodoList" ></LeftSideBar>
-  <Todolist :selectedTodoList="selectedTodoList"></Todolist>
-  
+  <div class="components">
+    <LeftSideBar @updateDisplayedTodoList="changeDisplayedTodoList" ></LeftSideBar>
+    <Todolist :selectedTodoList="selectedTodoList"></Todolist>
+  </div>
 </template>
 
 <script>
@@ -31,6 +31,10 @@ export default {
 
 
 <style>
+  .components {
 
+    display : grid;
+    grid-template-columns: 3fr 8fr 1fr;
+  }
 
 </style>

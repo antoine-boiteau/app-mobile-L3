@@ -102,6 +102,7 @@ export default{
   .todolist {
       background-color : #fffae1 ;
       padding: 10px 2vw 10px 2vw;
+      border : 2px solid #f5efd1;
   }
   .todolist > * {
     max-width: 90%;

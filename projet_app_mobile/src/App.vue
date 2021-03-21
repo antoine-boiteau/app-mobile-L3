@@ -2,8 +2,6 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/login">Login</router-link>
-  </div>
-  <div class="components">
     <router-view></router-view>
   </div>
 </template>
@@ -18,11 +16,7 @@
   font-size : 20px;
   }
 
-  .components {
 
-    display : grid;
-    grid-template-columns: 3fr 8fr 1fr;
-  }
 
   button {
     background-color: #fcfcff;
