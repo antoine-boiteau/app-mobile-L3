@@ -8,7 +8,7 @@
         <button @click="createList({newListName})">Créer une todolist</button> </p>
         <ul v-if="lists.length > 0">
             <li v-for="todoList in lists" v-bind:key = "todoList.id">
-            <button @click="developTodoList(todoList.id)" class="todolistClickable"> {{ todoList.name }} </button>
+            <button @click="developTodoList(todoList.id)" class="todolistClickable"> {{ todoList.name + ' (' + this.getUncompletedTodo(todoList.id) + ')'}} </button>
             <button @click="deleteList(todoList.id)">X</button>
             </li>
         </ul>
@@ -42,7 +42,7 @@ export default{
         ...mapActions('account', ['getUser']),
     },
     computed: {
-        ...mapGetters("todolist", ["lists"]),
+        ...mapGetters("todolist", ["lists", "getUncompletedTodo"]),
         ...mapGetters('account', ['userToken', 'getUserName'])
     },
     created() {

@@ -31,3 +31,7 @@ export const getCompletedOnly = (state) => {
 export const getUncompletedOnly = (state) => {
     return state.todos.filter(todo => !todo.completed);
 }
+
+export const getUncompletedTodo = (state) => (id) =>{
+    return state.todoLists.find(todoList => todoList.id === id).todos.filter( toudou => !toudou.completed).length;
+}
