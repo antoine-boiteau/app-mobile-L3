@@ -1,8 +1,11 @@
 <template>
     <div class="sideBar">
-        <button @click="logOut">Se déconnecter</button>
-        <b v-if="this.getUserName != ''"> Bienvenue {{ this.getUserName }} ! </b>
+        <p><button @click="logOut">Se déconnecter</button>
+        <b> Bienvenue {{ this.getUserName }} ! </b></p>
+
         <h1>Mes listes :</h1>
+        <p><input type="text" placeholder="Nouvelle todolist" name="newListName" v-model="newListName">
+        <button @click="createList({newListName})">Créer une todolist</button> </p>
         <ul v-if="lists.length > 0">
             <li v-for="todoList in lists" v-bind:key = "todoList.id">
             <button @click="developTodoList(todoList.id)" class="todolistClickable"> {{ todoList.name }} </button>
@@ -10,9 +13,6 @@
             </li>
         </ul>
         <b v-else>Vous n'avez aucune liste pour le moment !</b><br>
-
-        <input type="text" placeholder="Nouvelle todolist" name="newListName" v-model="newListName">
-        <button @click="createList({newListName})">Créer la todolist</button>
     </div>
 </template>
 

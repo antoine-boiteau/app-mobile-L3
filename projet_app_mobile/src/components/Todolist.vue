@@ -2,6 +2,16 @@
     <div class="todolist">
 
         <h2> {{ getName }} </h2>
+
+        <input type="text" placeholder="Nouvelle tâche" name="newTodoName" v-model="newTodoName">
+        <button @click="createTodo({newTodoName, selectedTodoList})">Créer une tâche</button>
+        <div class="filters">
+          Filtrer :
+          <button @click="showEveryTodos">Voir tout</button>
+          <button @click="showCompleteds">Complétées</button>
+          <button @click="showNotCompleteds">À faire</button>
+        </div>
+
         <ul v-if="existTodo">
             <li v-for="todo in filteredTodos" :key = "todo.id" class="todo">
             <label class="todoText">
@@ -14,14 +24,6 @@
         </ul>
         <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
         <p v-else><b>Aucune liste sélectionnée</b></p>
-        <input type="text" placeholder="Nouvelle tâche" name="newTodoName" v-model="newTodoName">
-        <button @click="createTodo({newTodoName, selectedTodoList})">Créer la tâche</button>
-        <div class="filters">
-          Filtrer :
-          <button @click="showEveryTodos">Voir tout</button>
-          <button @click="showCompleteds">Complétées</button>
-          <button @click="showNotCompleteds">À faire</button>
-        </div>
     </div>
 
 </template>
