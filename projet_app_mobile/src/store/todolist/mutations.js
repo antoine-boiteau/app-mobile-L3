@@ -2,6 +2,10 @@ export function load(state, data) {
     state.todoLists = data;
 }
 
+export function loadTodos(state, data) {
+    state.todos = data;
+}
+
 export function create(state, data) {
     console.log(state);
     console.log(data);
