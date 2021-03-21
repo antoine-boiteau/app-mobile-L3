@@ -23,5 +23,6 @@ export function deleteTodo(state, id) {
 }
 
 export function completeTodo(state, data) {
+    state.todoLists.find(list => list.id === data.todolist_id).todos.find(todo => todo.id === data.id).completed = !state.todoLists.find(list => list.id === data.todolist_id).todos.find(todo => todo.id === data.id).completed
     state.todos.find(todo => todo.id === data.id).completed = !state.todos.find(todo => todo.id === data.id).completed;
 }
