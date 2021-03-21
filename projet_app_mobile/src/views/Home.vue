@@ -28,7 +28,7 @@ export default {
     },
   },
   created() {
-    if(!JSON.parse(localStorage.isLogged)) {
+    if(localStorage.getItem('isLogged') === null || !JSON.parse(localStorage.isLogged)) {
       router.push('/login');
     }
   }
