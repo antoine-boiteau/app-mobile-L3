@@ -33,8 +33,8 @@ export function createList({ commit }, payload) {
 
 export function deleteList({ commit }, id) {
     httpClient.delete('todolist/' + id)
-    .then(function (response) {
-        commit("deleteList", response.data);
+    .then(function () {
+        commit("deleteList", id);
     })
     .catch(function (error) {
         console.log(error);
@@ -56,8 +56,8 @@ export function createTodo({ commit }, payload) {
 
 export function deleteTodo({ commit }, id) {
     httpClient.delete('todo/' + id)
-    .then(function (response) {
-        commit("deleteTodo", response.data);
+    .then(function () {
+        commit("deleteTodo", id);
     })
     .catch(function (error) {
         console.log(error);

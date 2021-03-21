@@ -7,26 +7,21 @@ export function loadTodos(state, data) {
 }
 
 export function create(state, data) {
-    console.log(state);
-    console.log(data);
+    state.todoLists.push(data);
 }
 
-export function deleteList(state, data) {
-    console.log(state);
-    console.log(data);
+export function deleteList(state, id) {
+    state.todoLists = state.todoLists.filter(list => list.id !== id);
 }
 
 export function createTodo(state, data) {
-    console.log(state);
-    console.log(data);
+    state.todos.push(data);
 }
 
-export function deleteTodo(state, data) {
-    console.log(state);
-    console.log(data);
+export function deleteTodo(state, id) {
+    state.todos = state.todos.filter(todo => todo.id !== id);
 }
 
 export function completeTodo(state, data) {
-    console.log(state);
-    console.log(data);
+    state.todos.find(todo => todo.id === data.id).completed = !state.todos.find(todo => todo.id === data.id).completed;
 }

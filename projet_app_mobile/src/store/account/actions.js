@@ -1,11 +1,13 @@
-import axios from 'axios';
+import httpClient from '@/api/api';
+import router from '../../router';
 
 export function login({ commit }, payload) {
     let email = payload.email;
     let password = payload.password;
-    axios.post('http://138.68.74.39/api/login', {email,password})
+    httpClient.post('login', {email,password})
     .then(function (response) {
         commit("setUserToken", response.data.token);
+        router.push('/');
     })
     .catch(function (error) {
         alert(error.response.data.error);
@@ -16,9 +18,10 @@ export function register({ commit }, payload) {
     let name = payload.name;
     let email = payload.email;
     let password = payload.password;
-    axios.post('http://138.68.74.39/api/register', {name,email,password})
+    httpClient.post('register', {name,email,password})
     .then(function (response) {
         commit("setUserToken", response.data.token);
+        router.push('/');
     })
     .catch(function (error) {
         if(error.response.data.errors != null)
@@ -29,9 +32,9 @@ export function register({ commit }, payload) {
 }
 
 export function getUser({ commit }) {
-    axios.get('http://138.68.74.39/api/user')
+    httpClient.get('user')
     .then(function (response) {
-        commit("signIn", response.data);
+        commit("getUser", response.data);
     })
     .catch(function (error) {
         console.log(error);

@@ -9,6 +9,7 @@
 
 import Todolist from '../components/Todolist.vue'
 import LeftSideBar from '../components/LeftSideBar.vue'
+import router from '../router'
 
 export default {
   name: 'Home',
@@ -25,6 +26,11 @@ export default {
     changeDisplayedTodoList: function(id){
       this.selectedTodoList = id;
     },
+  },
+  created() {
+    if(!JSON.parse(localStorage.isLogged)) {
+      router.push('/login');
+    }
   }
 }
 </script>

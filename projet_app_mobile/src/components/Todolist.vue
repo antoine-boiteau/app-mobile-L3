@@ -9,13 +9,13 @@
               <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
               {{ todo.name }}
             </label>
-            <button @click="del(todo.id)"> X </button>
+            <button @click="deleteTodo(todo.id)"> X </button>
             </li>
         </ul>
         <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
         <p v-else><b>Aucune liste sélectionnée</b></p>
         <input type="text" placeholder="Nouvelle tâche" name="newTodoName" v-model="newTodoName">
-        <button @click="create(newTodoName,selectedTodoList)">Créer la tâche</button>
+        <button @click="createTodo({newTodoName, selectedTodoList})">Créer la tâche</button>
         <div class="filters">
           Filtrer :
           <button @click="showEveryTodos">Voir tout</button>
@@ -52,33 +52,8 @@ export default{
         }, 
         ...mapActions('todolist', ["loadTodos", "createTodo", "deleteTodo", "completeTodo"]),
         updateTodo: function(name, todolist_id, completed, id) {
-            let len = this.getTodosLength;
             this.completeTodo({name, todolist_id, completed, id});
-            this.loadTodos(this.selectedTodoList);
-            if(len == this.getTodosLength) {
-                this.loadTodos(this.selectedTodoList);
-            }
         },
-        create: function(newTodoName, selectedTodoList) {
-            let len = this.getTodosLength;
-            this.createTodo({newTodoName, selectedTodoList});
-            this.loadTodos(this.selectedTodoList);
-            if(len == this.getTodosLength) {
-                this.loadTodos(this.selectedTodoList);
-                this.loadTodos(this.selectedTodoList);
-                this.loadTodos(this.selectedTodoList);
-            }
-        },
-        del: function(id) {
-            let len = this.getTodosLength;
-            this.deleteTodo(id);
-            this.loadTodos(this.selectedTodoList);
-            if(len == this.getTodosLength) {
-                this.loadTodos(this.selectedTodoList);
-                this.loadTodos(this.selectedTodoList);
-                this.loadTodos(this.selectedTodoList);
-            }
-        }
     },
     computed: {
         ...mapGetters('todolist', ["existList", "getListName","existTodo", "getTodosLength" ,"getEveryTodo", "getCompletedOnly", "getUncompletedOnly"]),
