@@ -42,5 +42,5 @@ export const getAllUncompleted = (state) =>{
         acc += (state.todoLists[list].todos.filter(toudou => !toudou.completed).length);
         
     }
-    return acc
+    return acc;
 }

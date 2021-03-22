@@ -77,3 +77,16 @@ export function completeTodo({ commit }, payload) {
         console.log(error);
     })
 }
+
+
+export function modifyTodo({commit}, payload) {
+    let name = payload.name;
+    let id = payload.id;
+    httpClient.patch("todo/" + id, {name})
+    .then(function(response) {
+        commit("modifyTodo", response.data);
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+}

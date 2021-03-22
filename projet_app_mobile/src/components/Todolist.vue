@@ -19,6 +19,8 @@
               <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
               {{ todo.name }}
             </label>
+            <input type ="text" placeholder="modifiez-moi" name="list+'todo.id'"  v-model="ids['list'+todo.id]">
+            <button @click="modify(ids['list'+todo.id], todo.id)">Modifier</button>
             <button @click="deleteTodo(todo.id)"> X </button>
             </li>
         </ul>
@@ -36,7 +38,8 @@ export default{
     data(){
             return{
                 newTodoName: '',
-                filter: 'all'
+                filter: 'all',
+                ids:{}
             }
         },
     props: {
@@ -52,10 +55,13 @@ export default{
         showNotCompleteds: function(){
             this.filter= 'uncompleted';
         }, 
-        ...mapActions('todolist', ["loadTodos", "createTodo", "deleteTodo", "completeTodo"]),
+        ...mapActions('todolist', ["loadTodos", "createTodo", "deleteTodo", "completeTodo", "modifyTodo"]),
         updateTodo: function(name, todolist_id, completed, id) {
             this.completeTodo({name, todolist_id, completed, id});
         },
+        modify: function(name, id) {
+            this.modifyTodo({name, id});
+        }
     },
     computed: {
         ...mapGetters('todolist', ["existList", "getListName","existTodo", "getTodosLength" ,"getEveryTodo", "getCompletedOnly", "getUncompletedOnly"]),
