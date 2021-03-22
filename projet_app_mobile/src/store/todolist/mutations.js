@@ -16,10 +16,12 @@ export function deleteList(state, id) {
 
 export function createTodo(state, data) {
     state.todos.push(data);
+    state.todoLists.find(list => list.id === data.todolist_id).todos.push(data);
 }
 
-export function deleteTodo(state, id) {
-    state.todos = state.todos.filter(todo => todo.id !== id);
+export function deleteTodo(state, data) {
+    state.todos = state.todos.filter(todo => todo.id !== data.todoId);
+    state.todoLists.find(list => list.id === data.listId).todos = state.todoLists.find(list => list.id === data.listId).todos.filter(todo => todo.id !== data.todoId);
 }
 
 export function completeTodo(state, data) {
@@ -28,7 +30,5 @@ export function completeTodo(state, data) {
 }
 
 export function modifyTodo(state, data) {
-    console.log(data);
-    console.log(state);
     state.todos.find(todo => todo.id === data.id).name = data.name;
 }

@@ -54,10 +54,11 @@ export function createTodo({ commit }, payload) {
     })
 }
 
-export function deleteTodo({ commit }, id) {
-    httpClient.delete('todo/' + id)
+export function deleteTodo({ commit }, payload) {
+    let todoId = payload.todoId;
+    httpClient.delete('todo/' + todoId)
     .then(function () {
-        commit("deleteTodo", id);
+        commit("deleteTodo", payload);
     })
     .catch(function (error) {
         console.log(error);

@@ -21,7 +21,7 @@
             </label>
             <input type ="text" placeholder="modifiez-moi" name="list+'todo.id'"  v-model="ids['list'+todo.id]">
             <button @click="modify(ids['list'+todo.id], todo.id)">Modifier</button>
-            <button @click="deleteTodo(todo.id)"> X </button>
+            <button @click="del(todo.id, todo.todolist_id)"> X </button>
             </li>
         </ul>
         <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
@@ -61,6 +61,9 @@ export default{
         },
         modify: function(name, id) {
             this.modifyTodo({name, id});
+        },
+        del: function(todoId, listId) {
+            this.deleteTodo({todoId, listId});
         }
     },
     computed: {
