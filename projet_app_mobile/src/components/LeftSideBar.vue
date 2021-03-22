@@ -4,6 +4,7 @@
         <b> Bienvenue {{ this.getUserName }} ! </b></p>
 
         <h1>Mes listes :</h1>
+        <h4 v-if ="lists.length > 0">Nombre de todos restants ({{  this.getAllUncompleted }})</h4>
         <p><input type="text" placeholder="Nouvelle todolist" name="newListName" v-model="newListName">
         <button @click="createList({newListName})">Créer une todolist</button> </p>
         <ul v-if="lists.length > 0">
@@ -42,7 +43,7 @@ export default{
         ...mapActions('account', ['getUser']),
     },
     computed: {
-        ...mapGetters("todolist", ["lists", "getUncompletedTodo"]),
+        ...mapGetters("todolist", ["lists", "getUncompletedTodo", "getAllUncompleted"]),
         ...mapGetters('account', ['userToken', 'getUserName'])
     },
     created() {
