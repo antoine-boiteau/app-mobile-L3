@@ -44,3 +44,8 @@ export const getAllUncompleted = (state) =>{
     }
     return acc;
 }
+
+export const getLogOut = (state) => {
+    state.todoLists = [];
+    state.todos = [];
+}

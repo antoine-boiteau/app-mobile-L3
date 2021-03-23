@@ -38,12 +38,13 @@ export default{
             localStorage.removeItem('token');
             localStorage.setItem('isLogged', false);
             router.push('/login');
+            this.getLogOut();
         },
         ...mapActions("todolist", ["load", "createList", "deleteList", "loadTodos"]),
         ...mapActions('account', ['getUser']),
     },
     computed: {
-        ...mapGetters("todolist", ["lists", "getUncompletedTodo", "getAllUncompleted"]),
+        ...mapGetters("todolist", ["lists", "getUncompletedTodo", "getAllUncompleted", "getLogOut"]),
         ...mapGetters('account', ['userToken', 'getUserName'])
     },
     created() {
