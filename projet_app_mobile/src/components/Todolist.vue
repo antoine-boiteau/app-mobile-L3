@@ -17,11 +17,11 @@
             <label class="todoText">
               <input type="checkbox" checked v-if="todo.completed" @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
               <input type="checkbox" v-else @change="updateTodo(todo.name, todo.todolist_id, todo.completed, todo.id)">
-              {{ todo.name }}
             </label>
-            <input type ="text" placeholder="modifiez-moi" name="list+'todo.id'"  v-model="ids['list'+todo.id]">
-            <button @click="modify(ids['list'+todo.id], todo.id)">Modifier</button>
-            <button @click="del(todo.id, todo.todolist_id)"> X </button>
+            <div class="nameDisplayer">
+                <input type="text" class="nameDisplayerInput" @blur="modify(todo.name, todo.id)"  v-model=todo.name>
+            </div>
+            <button @click="del(todo.id, todo.todolist_id)" class="deleteButton"> X </button>
             </li>
         </ul>
         <p v-else-if="existList(this.selectedTodoList)"><b>Aucune todo dans cette liste</b></p>
@@ -38,8 +38,7 @@ export default{
     data(){
             return{
                 newTodoName: '',
-                filter: 'all',
-                ids:{}
+                filter: 'all'
             }
         },
     props: {
@@ -96,6 +95,8 @@ export default{
   .todo {
   margin : 0px 5px 0px 5px;
   padding : 5px;
+  display : grid;
+  grid-template-columns : 1fr 18fr 2fr
   }
   .todo + .todo {
     border-top : solid 1px #444455;
@@ -104,8 +105,27 @@ export default{
     margin: 10px 0px 0px 0px;
   }
   .todoText {
-    display: inline-block;
     font-size : 22px ;
-    width: 90%;
   }
+
+  .deleteButton {
+      padding: 1px;
+  }
+
+
+
+  .nameDisplayer:hover {
+      background-color : #fffdf1;
+  }
+
+  .nameDisplayer:not(:hover) > input {
+      background-color : #fffae1;
+      border : #fffae1;
+  }
+
+  .nameDisplayer:not(:hover) > button {
+    display: none  
+  }
+
+
 </style>
